@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69bc10ea020d44118faa5d1957a2b66e, type: 3}
+  m_Name: Example
+  m_EditorClassIdentifier: 
+  _serializedGraph: '{"type":"RedSaw.MissionSystem.MissionChain","nodes":[{"_requires":[{"eventType":"PlayerBehaviourExample","count":3,"_unfolded":true,"_node":{"$ref":"0"},"$type":"MyMissionRequireTemplate"}],"_UID":"3f9ea2fa-0c6f-4cda-bfef-c2b74a48f32f","_position":{"x":171.7814,"y":237.4089},"$type":"RedSaw.MissionSystem.NodeMission","$id":"0"},{"action":{"message":"Entrance
+    Mission Completed","_node":{"$ref":"1"},"_unfolded":true,"$type":"RedSaw.MissionSystem.DebugLog"},"_position":{"x":494.6235,"y":141.2186},"$type":"RedSaw.MissionSystem.NodeAction","$id":"1"},{"_requires":[{"eventType":"CompleteDialogue","count":3,"_unfolded":true,"_node":{"$ref":"2"},"$type":"MyMissionRequireTemplate"}],"_UID":"12510b6a-d372-4485-84b6-ca737499bfac","_position":{"x":504.7488,"y":351.6193},"$type":"RedSaw.MissionSystem.NodeMission","$id":"2"},{"action":{"message":"Second
+    Mission Completed","_node":{"$ref":"3"},"_unfolded":true,"$type":"RedSaw.MissionSystem.DebugLog"},"_position":{"x":800.0,"y":240.0},"$type":"RedSaw.MissionSystem.NodeAction","$id":"3"}],"connections":[{"_condition":{"_unfolded":true,"$type":"RedSaw.MissionSystem.Dice"},"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"1"},"$type":"RedSaw.MissionSystem.ConnectionBase"},{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"2"},"$type":"RedSaw.MissionSystem.ConnectionBase"},{"_sourceNode":{"$ref":"2"},"_targetNode":{"$ref":"3"},"$type":"RedSaw.MissionSystem.ConnectionBase"}],"canvasGroups":[],"localBlackboard":{"_variables":{}}}'
+  _objectReferences: []
+  _graphSource:
+    _version: 3.31
+    _category: 
+    _comments: 
+    _translation: {x: -114.962524, y: 26.815962}
+    _zoomFactor: 0.820597
+  _haltSerialization: 0
+  _externalSerializationFile: {fileID: 0}
