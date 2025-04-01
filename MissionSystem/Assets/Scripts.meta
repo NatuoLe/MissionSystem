@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:MissionSystem/Assets/Scripts.meta
 guid: 0342f7461ccf33f40bc8efd5839d774c
+========
+guid: 813575764dc0f11408910ec4c5f0dd16
+>>>>>>>> 8c533637e776643264f13ab5ff50d1491b6fb6db:MissionSystem/Assets/Resources.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
