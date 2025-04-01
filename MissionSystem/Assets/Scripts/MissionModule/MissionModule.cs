@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Newtonsoft.Json;
 using RedSaw.MissionSystem;
 using ThGold.Common;
 using ThGold.Event;
@@ -60,19 +59,7 @@ public class MissionModule : SingletonNoNomo<MissionModule>
     public void CompletedMission(string key)
     {
         _completedMissions.Add(key);
-        SaveData();
-    }
-
-    public void SaveData()
-    {
-        string json = JsonConvert.SerializeObject(_completedMissions, Formatting.Indented);
-
+   
     }
     
-
-    private List<string> deserializeGuideList(string json)
-    {
-        var maps = JsonConvert.DeserializeObject<List<string>>(json);
-        return maps;
-    }
 }
