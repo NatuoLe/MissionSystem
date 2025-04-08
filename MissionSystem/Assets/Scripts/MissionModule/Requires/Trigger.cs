@@ -1,7 +1,7 @@
 using System;
 using ParadoxNotion.Design;
-using RedSaw.Editor;
-using RedSaw.MissionSystem;
+using GNode.Editor;
+using GNode.MissionSystem;
 using UnityEngine;
 
 [Name("触发器"), Description("触发就直接完成")]
@@ -10,7 +10,7 @@ public class Trigger : MissionRequireTemplate
     [SerializeField] private string eventType;
     public override bool CheckMessage(object message)
     {
-        if (message is not MissionMessage gameMessage) return false;
+        if (message is not NodeMessage gameMessage) return false;
         return gameMessage.type.ToString() == eventType;
     }
 
@@ -40,7 +40,7 @@ public class Trigger : MissionRequireTemplate
 
     protected override void OnInspectorGUI()
     {
-        DropdownMenu.MakeMenu("事件类型", eventType, Enum.GetNames(typeof(MissionEventType)), result => eventType = result);
+        DropdownMenu.MakeMenu("事件类型", eventType, Enum.GetNames(typeof(GNodeEventType)), result => eventType = result);
     }
 #endif
 }

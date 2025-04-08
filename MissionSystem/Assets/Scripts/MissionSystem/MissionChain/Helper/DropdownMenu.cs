@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEditor;
 using PopupWindow = UnityEditor.PopupWindow;
 
-namespace RedSaw.Editor
+namespace GNode.Editor
 {
     /// <summary>
     /// a simple universal dropdown menu implementation based on Unity PopupWindowContent

@@ -4,7 +4,7 @@ using UnityEngine;
 using ParadoxNotion;
 using NodeCanvas.Framework;
 
-namespace RedSaw.MissionSystem
+namespace GNode.MissionSystem
 {
     
     [GraphInfo(
@@ -13,7 +13,7 @@ namespace RedSaw.MissionSystem
         resourcesURL = "https://nodecanvas.paradoxnotion.com/downloads/",
         forumsURL = "https://nodecanvas.paradoxnotion.com/forums-page/"
     )]
-    [CreateAssetMenu(menuName = "RedSaw/MissionSystem/MissionChain", fileName = "New MissionChain")]
+    [CreateAssetMenu(menuName = "GNode/MissionSystem/MissionChain", fileName = "New MissionChain")]
     public class MissionChain : Graph
     {
         public override Type baseNodeType => typeof(NodeBase);

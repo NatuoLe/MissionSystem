@@ -1,18 +1,19 @@
-public enum MissionEventType
+public enum GNodeEventType
 {
     MoneyArrived,
     StepClick,
     LevelArrived,
     ShowPopup,
+    StartStep,
 }
 
-public class MissionMessage
+public class NodeMessage
 {
-    public readonly MissionEventType type;
+    public readonly GNodeEventType type;
     public readonly object args;
     public bool hasUsed { get; private set; }
 
-    public MissionMessage(MissionEventType type, object args = null)
+    public NodeMessage(GNodeEventType type, object args = null)
     {
         this.type = type;
         this.args = args;

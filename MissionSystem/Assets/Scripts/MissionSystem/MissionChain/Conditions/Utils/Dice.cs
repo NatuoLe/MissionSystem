@@ -2,7 +2,7 @@ using ParadoxNotion.Design;
 using UnityEngine;
 
 
-namespace RedSaw.MissionSystem
+namespace GNode.MissionSystem
 {
     [Name("Dice"), Description("Roll a dice with given probability")]
     public class Dice : ConditionBase

@@ -7,7 +7,7 @@ using UnityEditor;
 #endif
 
 
-namespace RedSaw.MissionSystem
+namespace GNode.MissionSystem
 {
     [System.Serializable]
     public abstract class MissionChainObject

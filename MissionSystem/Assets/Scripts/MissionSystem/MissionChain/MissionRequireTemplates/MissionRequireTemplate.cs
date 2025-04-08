@@ -3,7 +3,7 @@ using ParadoxNotion.Design;
 using UnityEditor;
 using UnityEngine;
 
-namespace RedSaw.MissionSystem
+namespace GNode.MissionSystem
 {
     /// <summary>require template base type</summary>
     public abstract class MissionRequireTemplate : MissionRequire<object>

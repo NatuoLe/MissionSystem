@@ -3,7 +3,7 @@ using ParadoxNotion.Design;
 using UnityEditor;
 
 
-namespace RedSaw.MissionSystem
+namespace GNode.MissionSystem
 {
     /// <summary>base class for all mission graph conditions</summary>
     public abstract class ConditionBase : MissionChainObject

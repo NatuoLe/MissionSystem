@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace RedSaw.MissionSystem
+namespace GNode.MissionSystem
 {
     public class MissionChainManager : IMissionSystemComponent<object>
     {
@@ -18,7 +18,15 @@ namespace RedSaw.MissionSystem
             var handle = new MissionChainHandle(chain);
             handle.FlushBuffer(t => missionManager.StartMission(t));
             if (!handle.IsCompleted)
+            {
                 handles.Add(chain.name, handle);
+            }
+            else
+            {
+                //说明第一个此节点只有一个子节点
+                handle.OnMissionComplete(chain.primeNode.UID, true);
+            }
+               
         }
 
         public void OnMissionStarted(Mission<object> mission) { }

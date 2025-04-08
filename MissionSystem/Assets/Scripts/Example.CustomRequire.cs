@@ -1,4 +1,4 @@
-﻿using RedSaw.MissionSystem;
+﻿using GNode.MissionSystem;
 
 public static class GameAPI
 {
@@ -16,7 +16,7 @@ public static class GameAPI
 
     /// <summary>朝游戏广播一条消息</summary>
     /// <param name="message"></param>
-    public static void Broadcast(GameMessage message) =>
+    public static void Broadcast(NodeMessage message) =>
         MissionManager.SendMessage(message);
 
     public static void StartMission(MissionPrototype<object> missionProto) =>

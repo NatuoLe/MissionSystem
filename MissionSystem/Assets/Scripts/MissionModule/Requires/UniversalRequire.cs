@@ -1,7 +1,7 @@
 using System;
 using ParadoxNotion.Design;
-using RedSaw.Editor;
-using RedSaw.MissionSystem;
+using GNode.Editor;
+using GNode.MissionSystem;
 using UnityEngine;
 
 [Name("通用请求"), Description("任务模板")]
@@ -13,7 +13,7 @@ public class UniversalRequire : Require
 
     public override bool CheckMessage(object message)
     {
-        if (message is not MissionMessage gameMessage) return false;
+        if (message is not NodeMessage gameMessage) return false;
         return gameMessage.type.ToString() == eventType && (string)gameMessage.args == eventTag;
     }
 
@@ -46,7 +46,7 @@ public class UniversalRequire : Require
 
     protected override void OnInspectorGUI()
     {
-        DropdownMenu.MakeMenu("事件类型", eventType, Enum.GetNames(typeof(MissionEventType)), result => eventType = result);
+        DropdownMenu.MakeMenu("事件类型", eventType, Enum.GetNames(typeof(GNodeEventType)), result => eventType = result);
         eventTag = UnityEditor.EditorGUILayout.TextField("事件标签", eventTag);
         count = UnityEditor.EditorGUILayout.IntField("数量", count);
         count = Mathf.Max(1, count);

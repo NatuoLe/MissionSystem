@@ -1,7 +1,7 @@
 ﻿using System;
 using ParadoxNotion.Design;
-using RedSaw.Editor;
-using RedSaw.MissionSystem;
+using GNode.Editor;
+using GNode.MissionSystem;
 using UnityEngine;
 
 [Name("案例模板"), Description("基础任务模板")]

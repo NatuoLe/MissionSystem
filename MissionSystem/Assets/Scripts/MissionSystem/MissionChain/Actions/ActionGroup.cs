@@ -4,7 +4,7 @@ using ParadoxNotion.Design;
 using UnityEditor;
 using UnityEngine;
 
-namespace RedSaw.MissionSystem
+namespace GNode.MissionSystem
 {
     [DoNotList]
     public class ActionGroup : ActionBase

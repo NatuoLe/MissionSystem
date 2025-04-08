@@ -7,7 +7,7 @@ using ParadoxNotion.Design;
 using UnityEditor;
 #endif
 
-namespace RedSaw.MissionSystem
+namespace GNode.MissionSystem
 {
     public class ConnectionBase : Connection 
     { 

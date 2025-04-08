@@ -5,7 +5,7 @@ using ParadoxNotion.Design;
 using UnityEditor;
 #endif
 
-namespace RedSaw.MissionSystem
+namespace GNode.MissionSystem
 {
     /// <summary>base class of mission actions</summary>
     public abstract class ActionBase : MissionChainObject

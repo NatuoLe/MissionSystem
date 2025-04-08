@@ -2,7 +2,7 @@
 using NodeCanvas.Framework;
 using ParadoxNotion;
 
-namespace RedSaw.MissionSystem
+namespace GNode.MissionSystem
 {
     public abstract class NodeBase : Node
     {

@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace RedSaw.MissionSystem
+namespace GNode.MissionSystem
 {
     public static class Utils
     {

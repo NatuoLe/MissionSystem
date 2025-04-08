@@ -4,7 +4,7 @@ using UnityEngine;
 using ParadoxNotion.Design;
 using ParadoxNotion;
 
-namespace RedSaw.MissionSystem
+namespace GNode.MissionSystem
 {
     [ParadoxNotion.Design.Icon("stone"), Name("Action"), Color("fffde3")]
     [Description("Perform an action in the mission chain.")]

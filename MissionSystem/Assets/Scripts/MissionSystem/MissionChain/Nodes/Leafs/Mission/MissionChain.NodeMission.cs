@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-namespace RedSaw.MissionSystem
+namespace GNode.MissionSystem
 {
     [ParadoxNotion.Design.Icon("community-fill"), Color("b1d480"), Name("Mission")]
     [Description("setup a new mission")]
@@ -22,7 +22,7 @@ namespace RedSaw.MissionSystem
 
         /// <summary>create mission prototype</summary>
         /// <returns></returns>
-        public MissionPrototype<object> MissionProto
+        public virtual MissionPrototype<object> MissionProto
         {
             get
             {
@@ -47,7 +47,7 @@ namespace RedSaw.MissionSystem
         }
 
         /// <summary>add new require to current list</summary>
-        public void AddRequire(MissionRequireTemplate require)
+        public virtual void AddRequire(MissionRequireTemplate require)
         {
             if(require is null || _requires.Contains(require)) return;
             UndoUtility.RecordObject(graph, "Require Added");

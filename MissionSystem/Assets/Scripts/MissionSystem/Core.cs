@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
-namespace RedSaw.MissionSystem
+namespace GNode.MissionSystem
 {
     /// <summary>任务原型对象</summary>
     public class MissionPrototype<T>

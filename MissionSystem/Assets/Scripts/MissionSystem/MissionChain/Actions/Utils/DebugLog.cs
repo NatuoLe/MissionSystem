@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace RedSaw.MissionSystem
+namespace GNode.MissionSystem
 {
     [Name("Debug Log"), Category("Utils"), Description("Log a message to the console.")]
     public class DebugLog : ActionBase

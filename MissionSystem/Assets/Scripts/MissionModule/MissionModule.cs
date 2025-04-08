@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using RedSaw.MissionSystem;
+using GNode.MissionSystem;
 using ThGold.Common;
 using ThGold.Event;
 
@@ -45,13 +45,16 @@ public class MissionModule : SingletonNoNomo<MissionModule>
     {
         MissionChainManager.StartChain(_missionChainDic[missionKey]);
     }
-
+    public void StartMission(MissionChain chain)
+    {
+        MissionChainManager.StartChain(chain);
+    }
     private void MissionMessage(IEvent ievent)
     {
         MissionManager.SendMessage(ievent.data);
     }
 
-    public void SendMessage(MissionMessage msg)
+    public void SendMessage(NodeMessage msg)
     {
         MissionManager.SendMessage(msg);
     }

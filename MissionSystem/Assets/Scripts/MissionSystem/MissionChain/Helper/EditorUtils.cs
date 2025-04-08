@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using ParadoxNotion.Design;
 
-namespace RedSaw.MissionSystem
+namespace GNode.MissionSystem
 {
     public static class EditorHelper
     {
