@@ -40,7 +40,7 @@ namespace GNode.MissionSystem
             /* execute all available output connections */
             if (continues)
             {
-                foreach (var outConnection in node.outConnections.Where(c => ((ConnectionBase) c).IsAvailable))
+                foreach (var outConnection in node.outConnections.Where(c => ((ConnectionBase)c).IsAvailable))
                     ExecuteNode(outConnection.targetNode as NodeBase);
             }
         }
@@ -62,6 +62,9 @@ namespace GNode.MissionSystem
                     break;
                 case SubTree tree:
                     tree.Execute();
+                    break;
+                case NodeStarter starter:
+                    Debug.Log("执行Start");
                     break;
             }
         }
