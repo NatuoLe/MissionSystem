@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69bc10ea020d44118faa5d1957a2b66e, type: 3}
   m_Name: Gnode
   m_EditorClassIdentifier: 
-  _serializedGraph: '{"type":"GNode.MissionSystem.MissionChain","nodes":[{"explicitMission":true,"_requires":[{"eventType":"StartStep","_unfolded":true,"_node":{"$ref":"0"},"$type":"Trigger"}],"_UID":"476c873b-819b-417a-8b40-5e916a72dc67","_position":{"x":48.82828,"y":212.6013},"$type":"GNode.MissionSystem.NodeMission","$id":"0"},{"_subTree":{"_value":1},"_UID":"49f5a536-a1ac-4267-870a-653c8fc8c279","_position":{"x":440.7914,"y":45.93263},"$type":"GNode.MissionSystem.SubTree","$id":"1"},{"action":{"message":"Step_02","_node":{"$ref":"2"},"_unfolded":true,"$type":"GNode.MissionSystem.DebugLog"},"_UID":"60defd85-b433-445f-8a58-a45daeb3313b","_position":{"x":457.6057,"y":269.1821},"$type":"GNode.MissionSystem.NodeAction","$id":"2"}],"connections":[{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"1"},"_UID":"e769011a-eba5-475b-ad0e-b290f79a3b54","$type":"GNode.MissionSystem.ConnectionBase"},{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"2"},"$type":"GNode.MissionSystem.ConnectionBase"}],"canvasGroups":[],"localBlackboard":{"_variables":{}}}'
+  _serializedGraph: '{"type":"GNode.MissionSystem.MissionChain","nodes":[{"explicitMission":true,"_requires":[{"eventType":"StartStep","_unfolded":true,"_node":{"$ref":"0"},"$type":"Trigger"}],"_UID":"476c873b-819b-417a-8b40-5e916a72dc67","_tag":"mission1","_position":{"x":53.21915,"y":161.7814},"$type":"GNode.MissionSystem.NodeMission","$id":"0"},{"_subTree":{"_value":1},"_UID":"49f5a536-a1ac-4267-870a-653c8fc8c279","_name":"SubChain","_tag":"subChain","_position":{"x":426.7914,"y":52.81178},"$type":"GNode.MissionSystem.SubTree","$id":"1"},{"action":{"message":"Step_3","_node":{"$ref":"2"},"_unfolded":true,"$type":"GNode.MissionSystem.DebugLog"},"_position":{"x":694.1256,"y":113.2773},"$type":"GNode.MissionSystem.NodeAction","$id":"2"},{"action":{"message":"Step_02","_node":{"$ref":"3"},"_unfolded":true,"$type":"GNode.MissionSystem.DebugLog"},"_UID":"60defd85-b433-445f-8a58-a45daeb3313b","_position":{"x":428.575,"y":281.5943},"$type":"GNode.MissionSystem.NodeAction","$id":"3"}],"connections":[{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"1"},"_UID":"e769011a-eba5-475b-ad0e-b290f79a3b54","$type":"GNode.MissionSystem.ConnectionBase"},{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"3"},"$type":"GNode.MissionSystem.ConnectionBase"},{"_sourceNode":{"$ref":"1"},"_targetNode":{"$ref":"2"},"$type":"GNode.MissionSystem.ConnectionBase"}],"canvasGroups":[],"localBlackboard":{"_variables":{}}}'
   _objectReferences:
   - {fileID: 0}
   - {fileID: 11400000, guid: bec936944d56b2e4a9679d7f84e8e6bd, type: 2}
@@ -20,7 +20,7 @@ MonoBehaviour:
     _version: 3.31
     _category: 
     _comments: 
-    _translation: {x: 54.93638, y: 85.96947}
-    _zoomFactor: 1
+    _translation: {x: -38, y: 229}
+    _zoomFactor: 0.75009245
   _haltSerialization: 0
   _externalSerializationFile: {fileID: 0}

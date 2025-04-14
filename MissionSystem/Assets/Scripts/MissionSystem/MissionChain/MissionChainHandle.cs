@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using NodeCanvas.Framework;
 using UnityEngine;
 
 namespace GNode.MissionSystem
@@ -40,18 +41,31 @@ namespace GNode.MissionSystem
             /* execute all available output connections */
             if (continues)
             {
-                foreach (var outConnection in node.outConnections.Where(c => ((ConnectionBase) c).IsAvailable))
+                foreach (var outConnection in node.outConnections.Where(c => ((ConnectionBase)c).IsAvailable))
                     ExecuteNode(outConnection.targetNode as NodeBase);
             }
         }
 
-        public void OnNodeComplete(string missionId, bool continues)
+        public void OnNodeComplete(NodeBase node, bool continues)
         {
-            /*if (continues)
+            if (continues)
             {
                 foreach (var outConnection in node.outConnections.Where(c => ((ConnectionBase)c).IsAvailable))
                     ExecuteNode(outConnection.targetNode as NodeBase);
-            }*/
+            }
+        }
+
+        public void OnChainComplete(Graph chain, bool continues)
+        {
+            Debug.Log(chain);
+            if (continues)
+            {
+                List<Node> list = chain.GetConnectedNodes();
+                foreach (var node in list)
+                {
+                    ExecuteNode(node as NodeBase);
+                }
+            }
         }
 
         /// <summary>execute given node</summary>

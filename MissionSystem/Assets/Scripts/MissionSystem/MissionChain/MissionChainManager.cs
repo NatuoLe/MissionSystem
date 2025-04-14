@@ -27,7 +27,7 @@ namespace GNode.MissionSystem
             {
                 Debug.Log("[Manager]单任务完成");
                 //说明第一个此节点只有一个子节点
-                handle.OnMissionComplete(chain.primeNode.UID, true);
+                handle.OnChainComplete(chain, true);
             }
                
         }
