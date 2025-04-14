@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using GNode.MissionSystem;
 using ThGold.Common;
@@ -7,24 +8,24 @@ public class MissionModule : SingletonNoNomo<MissionModule>
 {
     public static MissionManager<object> MissionManager;
     public static MissionChainManager MissionChainManager;
+    public static MissionChainBridge MissionUIBridge;
     private List<MissionChain> _missionChains = new List<MissionChain>();
     private Dictionary<string, MissionChain> _missionChainDic = new Dictionary<string, MissionChain>();
     private List<string> _completedMissions = new List<string>();
-
+    
+    
     public void Init()
     {
-
         if (_completedMissions == null)
         {
             _completedMissions = new List<string>();
         }
 
 
-      
         MissionManager = new MissionManager<object>();
         MissionChainManager = new MissionChainManager(MissionManager);
+        MissionUIBridge = new MissionChainBridge();
         MissionManager.AddComponent(MissionChainManager);
-
     }
 
     public void StartMissions()
@@ -37,7 +38,6 @@ public class MissionModule : SingletonNoNomo<MissionModule>
 
     protected override void OnDestroy()
     {
-
         base.OnDestroy();
     }
 
@@ -45,10 +45,12 @@ public class MissionModule : SingletonNoNomo<MissionModule>
     {
         MissionChainManager.StartChain(_missionChainDic[missionKey]);
     }
+
     public void StartMission(MissionChain chain)
     {
         MissionChainManager.StartChain(chain);
     }
+
     private void MissionMessage(IEvent ievent)
     {
         MissionManager.SendMessage(ievent.data);
@@ -62,7 +64,5 @@ public class MissionModule : SingletonNoNomo<MissionModule>
     public void CompletedMission(string key)
     {
         _completedMissions.Add(key);
-   
     }
-    
 }

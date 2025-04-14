@@ -36,13 +36,22 @@ namespace GNode.MissionSystem
         public void OnMissionComplete(string missionId, bool continues)
         {
             if (!activeNodes.Remove(missionId, out var node)) return;
-
+            Debug.Log($"{this.GetHashCode()}[Complete Node].{missionId}");
             /* execute all available output connections */
             if (continues)
             {
-                foreach (var outConnection in node.outConnections.Where(c => ((ConnectionBase)c).IsAvailable))
+                foreach (var outConnection in node.outConnections.Where(c => ((ConnectionBase) c).IsAvailable))
                     ExecuteNode(outConnection.targetNode as NodeBase);
             }
+        }
+
+        public void OnNodeComplete(string missionId, bool continues)
+        {
+            /*if (continues)
+            {
+                foreach (var outConnection in node.outConnections.Where(c => ((ConnectionBase)c).IsAvailable))
+                    ExecuteNode(outConnection.targetNode as NodeBase);
+            }*/
         }
 
         /// <summary>execute given node</summary>
@@ -58,6 +67,7 @@ namespace GNode.MissionSystem
                 /* execute mission node, add output prototype to buffer queue */
                 case NodeMission missionNode:
                     if (activeNodes.ContainsKey(missionNode.MissionId)) return;
+                    Debug.Log($"{this.GetHashCode()}[Buffer_Enqueue].{missionNode.MissionId}");
                     buffer.Enqueue(missionNode);
                     break;
                 case SubTree tree:
@@ -65,6 +75,7 @@ namespace GNode.MissionSystem
                     break;
                 case NodeStarter starter:
                     Debug.Log("执行Start");
+                    starter.Execute(ExecuteNode);
                     break;
             }
         }

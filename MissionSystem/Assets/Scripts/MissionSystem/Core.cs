@@ -14,7 +14,7 @@ namespace GNode.MissionSystem
         public readonly MissionRequireMode requireMode;
         public readonly bool isSingleRequire;
         private readonly MissionReward[] rewards;
-        
+        public readonly bool explicitMission;
         /// <summary>
         /// 初始化任务原型
         /// </summary>
@@ -24,7 +24,7 @@ namespace GNode.MissionSystem
         /// <param name="requireMode"></param>
         /// <param name="property"></param>
         /// <exception cref="Exception"></exception>
-        public MissionPrototype(string id, [DisallowNull] MissionRequire<T>[] requires, MissionReward[] rewards = null, MissionRequireMode requireMode = default, MissionProperty property = null)
+        public MissionPrototype(string id, [DisallowNull] MissionRequire<T>[] requires, MissionReward[] rewards = null, MissionRequireMode requireMode = default, MissionProperty property = null, bool explicitMission = false)
         {
             /* check if mission id is valid */
             if (string.IsNullOrEmpty(id)) 
@@ -39,6 +39,7 @@ namespace GNode.MissionSystem
             this.rewards = rewards;
             this.requireMode = requireMode;
             this.property = property;
+            this.explicitMission = explicitMission;
             
             this.isSingleRequire = requires.Length == 1;
         }
@@ -131,7 +132,7 @@ namespace GNode.MissionSystem
 
         public string id => proto.id;
         public MissionProperty property => proto.property;
-
+        public bool explicitMission => proto.explicitMission;
         /// <summary>获取任务的进度状态</summary>
         public string[] HandleStatus
         {
@@ -224,6 +225,7 @@ namespace GNode.MissionSystem
             /* 通知所有的组件任务启动了 */
             foreach (var component in components)
                 component.OnMissionStarted(mission);
+            
             return true;
         }
 

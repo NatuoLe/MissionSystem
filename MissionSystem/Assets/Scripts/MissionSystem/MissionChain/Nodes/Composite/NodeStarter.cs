@@ -1,4 +1,7 @@
-﻿using ParadoxNotion.Design;
+﻿using System;
+using System.Linq;
+using ParadoxNotion.Design;
+using UnityEngine;
 
 namespace GNode.MissionSystem
 {
@@ -8,5 +11,12 @@ namespace GNode.MissionSystem
     {
         public override bool allowAsPrime => true;
         public string MissionId => $"{graph.name}.NodeStarter.{base.UID}";
+
+        public void Execute(Action<NodeBase> HandleExcuteNode)
+        {
+            Debug.Log("执行[connections]");
+            foreach (var outConnection in outConnections.Where(c => ((ConnectionBase)c).IsAvailable))
+                HandleExcuteNode(outConnection.targetNode as NodeBase);
+        }
     }
 }

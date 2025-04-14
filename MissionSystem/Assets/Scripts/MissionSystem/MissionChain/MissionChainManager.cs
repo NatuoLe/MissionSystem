@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace GNode.MissionSystem
 {
@@ -23,6 +25,7 @@ namespace GNode.MissionSystem
             }
             else
             {
+                Debug.Log("[Manager]单任务完成");
                 //说明第一个此节点只有一个子节点
                 handle.OnMissionComplete(chain.primeNode.UID, true);
             }

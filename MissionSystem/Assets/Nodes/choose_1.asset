@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69bc10ea020d44118faa5d1957a2b66e, type: 3}
   m_Name: choose_1
   m_EditorClassIdentifier: 
-  _serializedGraph: '{"type":"GNode.MissionSystem.MissionChain","nodes":[{"_UID":"69371fee-01a3-4572-ab44-38d7394a2d6e","_position":{"x":114.0,"y":267.0},"$type":"GNode.MissionSystem.NodeStarter","$id":"0"},{"action":{"message":"Stpe_01","_node":{"$ref":"1"},"_unfolded":true,"$type":"GNode.MissionSystem.DebugLog"},"_UID":"68a0c830-8f82-496d-b187-81a5065e0e1b","_position":{"x":466.8967,"y":260.0916},"$type":"GNode.MissionSystem.NodeAction","$id":"1"}],"connections":[{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"1"},"$type":"GNode.MissionSystem.ConnectionBase"}],"canvasGroups":[],"localBlackboard":{"_variables":{}}}'
+  _serializedGraph: '{"type":"GNode.MissionSystem.MissionChain","nodes":[{"_UID":"69371fee-01a3-4572-ab44-38d7394a2d6e","_position":{"x":137.0,"y":140.0},"$type":"GNode.MissionSystem.NodeStarter","$id":"0"},{"action":{"message":"Stpe_01","_node":{"$ref":"1"},"_unfolded":true,"$type":"GNode.MissionSystem.DebugLog"},"_UID":"68a0c830-8f82-496d-b187-81a5065e0e1b","_position":{"x":466.8967,"y":260.0916},"$type":"GNode.MissionSystem.NodeAction","$id":"1"}],"connections":[{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"1"},"$type":"GNode.MissionSystem.ConnectionBase"}],"canvasGroups":[],"localBlackboard":{"_variables":{}}}'
   _objectReferences: []
   _graphSource:
     _version: 3.31

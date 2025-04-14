@@ -34,7 +34,7 @@ public class Trigger : MissionRequireTemplate
     {
         get
         {
-            return $"监听<b><size=12><color=#fffde3> \"{eventType}\" </color></size></b>事件<size=12></size>次";
+            return $"[触发器]监听<b><size=12><color=#fffde3> \"{eventType}\" </color></size></b>事件<size=12></size>触发";
         }
     }
 
