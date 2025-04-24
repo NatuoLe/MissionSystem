@@ -212,6 +212,8 @@ namespace GNode.MissionSystem
     {
         private readonly Dictionary<string, Mission<T>> allMissions = new Dictionary<string, Mission<T>>();
         private readonly List<IMissionSystemComponent<T>> components = new List<IMissionSystemComponent<T>>();
+        private readonly Dictionary<string, Mission<T>> monitorMissions = new Dictionary<string, Mission<T>>();
+
 
         /// <summary>启动目标任务</summary>
         /// <param name="proto"></param>
@@ -221,11 +223,10 @@ namespace GNode.MissionSystem
             if (proto is null || allMissions.ContainsKey(proto.id)) return false;
             var mission = new Mission<T>(proto);
             allMissions.Add(proto.id, mission);
-            
+
             /* 通知所有的组件任务启动了 */
             foreach (var component in components)
                 component.OnMissionStarted(mission);
-            
             return true;
         }
 
@@ -257,13 +258,13 @@ namespace GNode.MissionSystem
                 component.OnMissionRemoved(mission, false);
             return true;
         }
-        
+
         /// <summary>向任务系统发送消息以驱动任务系统</summary>
         /// <param name="message"></param>
         public void SendMessage(T message)
         {
             if (allMissions.Count == 0) return;
-            var queueToRemove = new Queue<Mission<T>>(); 
+            var queueToRemove = new Queue<Mission<T>>();
             foreach (var mission in allMissions.Values)
             {
                 if (!mission.SendMessage(message, out var hasStatusChanged))
@@ -276,19 +277,39 @@ namespace GNode.MissionSystem
                 mission.ApplyReward();
                 queueToRemove.Enqueue(mission);
             }
-            
+
             /* remove completed missions */
             while (queueToRemove.Count > 0)
             {
                 var mission = queueToRemove.Dequeue();
                 allMissions.Remove(mission.id);
-                
+
                 /* inform all componetns that target mission has been removed */
                 foreach (var component in components)
                     component.OnMissionRemoved(mission, true);
             }
+
+            // 处理监控任务
+            foreach (var monitor in monitorMissions.Values)
+            {
+                if (!monitor.SendMessage(message, out var hasStatusChanged))
+                {
+                    if (hasStatusChanged) _OnMissionStatusChanged(monitor, false);
+                    continue;
+                }
+
+                queueToRemove.Enqueue(monitor);
+                _OnMissionStatusChanged(monitor, true);
+                _OnMonitorMissionInvoke(monitor, true);
+            }
+            /* remove completed Monitor */
+            while (queueToRemove.Count > 0)
+            {
+                var mission = queueToRemove.Dequeue();
+                RemoveMonitor(mission.id);
+            }
         }
-        
+
         /// <summary>添加任务系统组件</summary>
         /// <param name="component"></param>
         public bool AddComponent(IMissionSystemComponent<T> component)
@@ -310,6 +331,46 @@ namespace GNode.MissionSystem
             foreach (var component in components)
                 component.OnMissionStatusChanged(mission, isFinished);
         }
+
+        private void _OnMonitorMissionInvoke(Mission<T> mission, bool isFinished)
+        {
+            foreach (var component in components)
+            {
+                component.OnMonitorInvoke(mission);
+            }
+        }
+
+        #region Monitor
+
+        /// <summary>
+        /// 注册监控任务
+        /// </summary>
+        public bool RegisterMonitor(MissionPrototype<T> proto)
+        {
+            if (proto == null || monitorMissions.ContainsKey(proto.id)) return false;
+
+            var monitorMissionList = new Mission<T>(proto);
+            monitorMissions.Add(proto.id, monitorMissionList);
+
+            foreach (var component in components)
+                component.OnMonitorRegistered(monitorMissionList);
+            return true;
+        }
+
+        /// <summary>
+        /// 移除监控任务
+        /// </summary>
+        public bool RemoveMonitor(string id)
+        {
+            if (!monitorMissions.Remove(id, out var monitor)) return false;
+
+            foreach (var component in components)
+                component.OnMonitorRemoved(monitor);
+
+            return true;
+        }
+
+        #endregion
     }
 
 
@@ -329,6 +390,17 @@ namespace GNode.MissionSystem
         /// <param name="mission"></param>
         /// <param name="isFinished"></param>
         public void OnMissionStatusChanged(Mission<T> mission, bool isFinished);
+
+        /// <summary>监控任务注册时触发</summary>
+        void OnMonitorRegistered(Mission<T> Proto);
+
+        /// <summary>监控任务移除时触发</summary>
+        void OnMonitorRemoved(Mission<T> monitor);
+
+        /// <summary>监控任务重置时触发</summary>
+        void OnMonitorReset(Mission<T> monitor);
+
+        void OnMonitorInvoke(Mission<T> monitor);
     }
     
 }

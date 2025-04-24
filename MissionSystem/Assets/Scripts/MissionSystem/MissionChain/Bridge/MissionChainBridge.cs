@@ -40,5 +40,25 @@ namespace GNode.MissionSystem
                 explicitHandles[mission.id] = mission;
             }*/
         }
+
+        public void OnMonitorRegistered(Mission<object> Proto)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void OnMonitorRemoved(Mission<object> monitor)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void OnMonitorReset(Mission<object> monitor)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void OnMonitorInvoke(Mission<object> monitor)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

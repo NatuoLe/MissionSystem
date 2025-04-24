@@ -19,7 +19,7 @@ namespace GNode.MissionSystem
         private string _title;
         private string _summary;
         private string _description;
-        public NodeMission _node;
+        public NodeRequire _node;
         
         public virtual string Title
         {

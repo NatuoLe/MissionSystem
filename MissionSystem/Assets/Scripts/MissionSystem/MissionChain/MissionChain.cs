@@ -23,5 +23,22 @@ namespace GNode.MissionSystem
         public override PlanarDirection flowDirection => PlanarDirection.Horizontal;
         public override bool allowBlackboardOverrides => false;
         public override bool canAcceptVariableDrops => false;
+        
+        // 通过ID获取节点
+        public NodeBase GetNode(string nodeId)
+        {
+            foreach (var iNode in allNodes)
+            {
+                if (iNode is NodeRequire require)
+                {
+                    if (require.MissionId == nodeId)
+                    {
+                        return require;
+                    }
+                }
+            }
+
+            return null;
+        }
     }
 }
