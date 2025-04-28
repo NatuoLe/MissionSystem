@@ -36,5 +36,11 @@ public class Example : MonoBehaviour
             Debug.Log("MSG: LevelArrived");
             GameAPI.Broadcast(new NodeMessage(GNodeEventType.LevelArrived));
         }
+        
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            Debug.Log("MSG: LevelArrived");
+            GameAPI.Broadcast(new NodeMessage(GNodeEventType.StepClick,"step3_done"));
+        }
     }
 }

@@ -20,7 +20,7 @@ namespace GNode.MissionSystem
         /// <summary>reset all [SeralizedField] field to defalut value</summary>
         public static void ResetObject<T>(T obj) where T : class
         {
-            if(obj is null) return;
+            if (obj is null) return;
 
             /* get all fields */
             var type = obj.GetType();
@@ -74,6 +74,16 @@ namespace GNode.MissionSystem
             /* copy all [SerializeField] field to new object */
             foreach (var field in fields.Where(x => x.IsDefined(typeof(SerializeField), true)))
                 field.SetValue(self, field.GetValue(other));
+        }
+
+        public static void ChainLog(object msg)
+        {
+            bool can = true;
+
+            if (can)
+            {
+                Debug.Log("[CHAIN]_" + msg);
+            }
         }
     }
 }

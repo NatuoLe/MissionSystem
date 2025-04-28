@@ -8,12 +8,12 @@ public class MissionModule : SingletonNoNomo<MissionModule>
 {
     public static MissionManager<object> MissionManager;
     public static MissionChainManager MissionChainManager;
-    public static MissionChainBridge MissionUIBridge;
+
     private List<MissionChain> _missionChains = new List<MissionChain>();
     private Dictionary<string, MissionChain> _missionChainDic = new Dictionary<string, MissionChain>();
     private List<string> _completedMissions = new List<string>();
-    
-    
+
+
     public void Init()
     {
         if (_completedMissions == null)
@@ -24,7 +24,7 @@ public class MissionModule : SingletonNoNomo<MissionModule>
 
         MissionManager = new MissionManager<object>();
         MissionChainManager = new MissionChainManager(MissionManager);
-        MissionUIBridge = new MissionChainBridge();
+
         MissionManager.AddComponent(MissionChainManager);
     }
 

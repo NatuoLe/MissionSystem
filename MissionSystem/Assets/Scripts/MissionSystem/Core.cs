@@ -9,12 +9,13 @@ namespace GNode.MissionSystem
     public class MissionPrototype<T>
     {
         public readonly string id;
-        public readonly MissionProperty property; 
+        public readonly MissionProperty property;
         public readonly MissionRequire<T>[] requires;
         public readonly MissionRequireMode requireMode;
         public readonly bool isSingleRequire;
         private readonly MissionReward[] rewards;
         public readonly bool explicitMission;
+
         /// <summary>
         /// 初始化任务原型
         /// </summary>
@@ -24,13 +25,14 @@ namespace GNode.MissionSystem
         /// <param name="requireMode"></param>
         /// <param name="property"></param>
         /// <exception cref="Exception"></exception>
-        public MissionPrototype(string id, [DisallowNull] MissionRequire<T>[] requires, MissionReward[] rewards = null, MissionRequireMode requireMode = default, MissionProperty property = null, bool explicitMission = false)
+        public MissionPrototype(string id, [DisallowNull] MissionRequire<T>[] requires, MissionReward[] rewards = null,
+            MissionRequireMode requireMode = default, MissionProperty property = null, bool explicitMission = false)
         {
             /* check if mission id is valid */
-            if (string.IsNullOrEmpty(id)) 
+            if (string.IsNullOrEmpty(id))
                 throw new Exception("mission id cannot be null or empty");
             this.id = id;
-            
+
             /* check if require array is valid */
             if (requires == null || requires.Length == 0)
                 throw new Exception("mission requires cannot be null or empty");
@@ -40,7 +42,7 @@ namespace GNode.MissionSystem
             this.requireMode = requireMode;
             this.property = property;
             this.explicitMission = explicitMission;
-            
+
             this.isSingleRequire = requires.Length == 1;
         }
 
@@ -68,8 +70,10 @@ namespace GNode.MissionSystem
     }
 
     /// <summary>任务附加属性描述</summary>
-    public abstract class MissionProperty { }
-    
+    public abstract class MissionProperty
+    {
+    }
+
     /// <summary>决定玩家具体要执行的行为</summary>
     /// <typeparam name="T">消息类型</typeparam>
     [System.Serializable]
@@ -96,12 +100,12 @@ namespace GNode.MissionSystem
     public abstract class MissionRequireHandle<T>
     {
         private readonly MissionRequire<T> _require;
-        
+
         protected MissionRequireHandle(MissionRequire<T> require)
         {
             _require = require;
         }
-        
+
         /// <summary>发送一条消息给玩家</summary>
         /// <param name="message"></param>
         /// <param name="hasStatusChanged"></param>
@@ -133,6 +137,7 @@ namespace GNode.MissionSystem
         public string id => proto.id;
         public MissionProperty property => proto.property;
         public bool explicitMission => proto.explicitMission;
+
         /// <summary>获取任务的进度状态</summary>
         public string[] HandleStatus
         {
@@ -144,7 +149,7 @@ namespace GNode.MissionSystem
                 return status;
             }
         }
-        
+
         public Mission(MissionPrototype<T> proto)
         {
             this.proto = proto;
@@ -180,7 +185,7 @@ namespace GNode.MissionSystem
         {
             hasStatusChanged = false;
             var queueToRemove = new Queue<MissionRequireHandle<T>>();
-            
+
             /* update all require handles */
             foreach (var requireHandle in _unfinishedHandles)
             {
@@ -189,11 +194,12 @@ namespace GNode.MissionSystem
                     hasStatusChanged |= _hasStatusChanged;
                     continue;
                 }
+
                 hasStatusChanged = true;
                 if (proto.requireMode == MissionRequireMode.Any) return true;
                 queueToRemove.Enqueue(requireHandle);
             }
-            
+
             /* remove completed requries */
             while (queueToRemove.Count > 0)
             {
@@ -221,12 +227,7 @@ namespace GNode.MissionSystem
         public bool StartMission(MissionPrototype<T> proto)
         {
             if (proto is null || allMissions.ContainsKey(proto.id)) return false;
-            var mission = new Mission<T>(proto);
-            allMissions.Add(proto.id, mission);
-
-            /* 通知所有的组件任务启动了 */
-            foreach (var component in components)
-                component.OnMissionStarted(mission);
+            addMission(proto);
             return true;
         }
 
@@ -253,9 +254,30 @@ namespace GNode.MissionSystem
         /// <returns></returns>
         public bool RemoveMission(string id)
         {
-            if (!allMissions.Remove(id, out var mission)) return false;
+            return subMission(id);
+        }
+
+        private void addMission(MissionPrototype<T> proto)
+        {
+            var mission = new Mission<T>(proto);
+            allMissions.Add(proto.id, mission);
+            Utils.ChainLog("addMission:" + proto.id);
+            /* 通知所有的组件任务启动了 */
             foreach (var component in components)
-                component.OnMissionRemoved(mission, false);
+                component.OnMissionStarted(mission);
+        }
+
+        private bool subMission(string id)
+        {
+            if (!allMissions.Remove(id, out var mission))
+            {
+                Utils.ChainLog("removeMission_false:" + id);
+                return false;
+            }
+
+            foreach (var component in components)
+                component.OnMissionRemoved(mission, true);
+            Utils.ChainLog("removeMission_true:" + id);
             return true;
         }
 
@@ -282,11 +304,12 @@ namespace GNode.MissionSystem
             while (queueToRemove.Count > 0)
             {
                 var mission = queueToRemove.Dequeue();
-                allMissions.Remove(mission.id);
-
-                /* inform all componetns that target mission has been removed */
+                /*allMissions.Remove(mission.id);
+                //Utils.ChainLog("removeMission:" + mission.id);
+                /* inform all componetns that target mission has been removed #1#
                 foreach (var component in components)
-                    component.OnMissionRemoved(mission, true);
+                    component.OnMissionRemoved(mission, true);*/
+                subMission(mission.id);
             }
 
             // 处理监控任务
@@ -302,6 +325,7 @@ namespace GNode.MissionSystem
                 _OnMissionStatusChanged(monitor, true);
                 _OnMonitorMissionInvoke(monitor, true);
             }
+
             /* remove completed Monitor */
             while (queueToRemove.Count > 0)
             {
@@ -402,5 +426,4 @@ namespace GNode.MissionSystem
 
         void OnMonitorInvoke(Mission<T> monitor);
     }
-    
 }

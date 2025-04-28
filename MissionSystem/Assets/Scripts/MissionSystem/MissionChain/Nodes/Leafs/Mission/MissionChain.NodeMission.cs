@@ -34,7 +34,7 @@ namespace GNode.MissionSystem
             }
         }
 
-        public string MissionId => $"{graph.name}.{base.UID}";
+        public string MissionId => $"{graph.name}.{name}.{base.UID}";
 
 #if UNITY_EDITOR
 
